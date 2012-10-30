@@ -1,35 +1,8 @@
 // Author: Michael S. Edelnant
 // SDI 1211
-// Project 1
+// Project 2
 // Fun Story Time
 
-/* ##########################
-Bulleted Story List
-###########################
-
-•	Introduce myself to my opponent & shake hands
-•	Lag to determine who breaks
-•	Call for second opinion to determine who won the lag.
-•	Determination is that I won the lag.
-•	Approach the table for my break.
-•	Decide on standard break.
-•	I break the rack with a standard break
-•	1 Solid and 1 Stripe fall.
-•	Decide on Stripes
-•	Sink the 9
-•	Sink the 14
-•	Sink the 12
-•	Sink the 13
-•	Sink the 15
-•	Play safety on the 11
-•	Opponent misses shot and gives me ball in hand
-•	Sink the 11 ball
-•	Mark pocket for the 8 ball
-•	Line up shot for 8 ball
-•	Sink 8 ball and win first rack
-•	To be continued.
-
-*/
 
 /* ##########################
 Define Variables
@@ -39,7 +12,7 @@ var myName = "Michael"; 							//string
 var opponentShortName = "Manuel"; 					//string
 var opponentFullName = "Manuel \"Speedy\" Lopez";	//escape string
 
-var matchLocation = "Trickshots Winter Park";		//string
+var matchLocation;		//string
 
 var stripeCount = 7;								//num
 var solidCount = 7;									//num
@@ -58,24 +31,27 @@ var procedureFunction = function(passedString) {
 	};
 };
 
-var booleanFunction = function(trueFalse,falseTrue) {
-	var boolFlag;
-	if(trueFalse === falseTrue) {
-		boolFlag = true;
-	} else {
-		boolFlag = false;
-	};
-	return boolFlag;
+//booleanFunction
+var didMakeEightBall = function(argArray,argNumber) {
+    var i = argArray.length;
+    while (i--) {
+        //If 8 still exists in set, then set to false
+        if (parseInt(argArray[i]) == argNumber) { 
+        	return false;
+    	};
+    };
+    //else return true
+    return true;
 };
 
 var numberFunction = function(passedNumber) {
 	var i = 0;
-	while(i < passedNumber) {
-		i++
+	while(i++ < passedNumber) {
 		console.log(i);
 	};
 };
 
+//String Function
 var stringFunction = function(stringOne,stringTwo) {
 	var myStringOne = stringOne;
 	var myStringTwo = stringTwo;
@@ -85,42 +61,71 @@ var stringFunction = function(stringOne,stringTwo) {
 };
 
 //Array Function
-var deleteBalls = function(passedNumber, passedArray) {
-	for (var i=0, j=passedNumber; i < j; i++) {
+var deleteBalls = function(argNumber, argArray) {
+	for (var i=0, j=argNumber; i < j; i++) {
 		//Random Index determined by initial set length of stripes or solids
-		varRandomIndex = (Math.floor((Math.random()*passedArray.length)));
+		var RandomIndex = (Math.floor((Math.random()*argArray.length)));
 		//Call out which balls were made
-		console.log(passedArray[varRandomIndex] + " ball made");
+		console.log(argArray[RandomIndex] + " ball falls...");
 		//Remove balls made
-		passedArray.splice(varRandomIndex, 1);
-		//Print array after elements removed
-		console.log(passedArray);
+		argArray.splice(RandomIndex, 1);
 	};
+	//Return manipulated array
+	return argArray;
+
 };
 
 
 //Random Break Function to make things interesting. Capping it to max of 3 balls each on the break.
 var breakRack = function(playerName,ballCount) {
-	var madeBalls = ballCount;
-	if(madeBalls > 0) {
-		varRandomFlag = (Math.floor((Math.random()*2)+1));
+	ballCount;
+	if(ballCount) {
+		var RandomFlag = (Math.floor((Math.random()*3)+1));
+		console.log(playerName + " breaks!");
 		//I like randomness: is there a better way to retrieve a random boolean?
-		if(varRandomFlag > 1) {
+		if(RandomFlag === 1) {
 			//Make Stripes
-			deleteBalls(madeBalls, stripeSet);
-		} else {
+			stripeSet = deleteBalls(ballCount, stripeSet);
+		} else if(RandomFlag === 2) {
 			//Else Make Solids
-			deleteBalls(madeBalls, solidSet);
+			solidSet = deleteBalls(ballCount, solidSet);
+		} else {
+			//Make Stripes and One less solid
+			stripeSet = deleteBalls(Math.floor(ballCount), stripeSet);
+			solidSet =  deleteBalls(Math.floor(ballCount), solidSet);
+		}
+
+		//Handle Pluralisation
+		if(ballCount > 1) {
+			if(ballCount > 2 && RandomFlag === 3) {
+				console.log("SledgeHammer Break!")
+				console.log(playerName + " made " + (ballCount*2) + " balls on the break!");
+				console.log("I've never seen anything like it before!!")
+			} else {
+				console.log(playerName + " made " + ballCount + " balls on the break!");
+			};
+		} else {
+			console.log(playerName + " made " + ballCount + " ball on the break!");
+		}
+
+		//Check if 8 fell...
+		if(didMakeEightBall(solidSet,8) === true) {
+			console.log("Wait a sec! " + playerName + " made the 8 on the break! On to the next rack!");
 		}
 		
 	} else {
+		//Womp Womp. Lame.
 		console.log(playerName + " made nothing on the break.")
 	};
 	
 };
 
-breakRack(myName, 3);
+breakRack(myName, 4);
 numberFunction(10);
+matchLocation = stringFunction("Trickshots", "Winter Park");
+console.log(matchLocation);
+console.log(stripeSet);
+console.log(solidSet);
 
 
 
