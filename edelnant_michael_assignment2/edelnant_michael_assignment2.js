@@ -1,7 +1,14 @@
 // Author: Michael S. Edelnant
-// SDI 1211
+// School: Full Sail University
+// Course: SDI 1211
+// Instructor: Lee Lewis
+// --------------------------------------------------------------------------- /
 // Project 2
+// Project Requirements: https://dl.dropbox.com/u/146464/project2_flowChart.png
+// Due Date: 11/1/2012
+// --------------------------------------------------------------------------- /
 // Fun Story Time w/ encapsulation
+
 
 
 /* ###################################################
@@ -65,25 +72,6 @@ var didMakeEightBall = function(argArray,argNumber) {
 };
 
 /* ###################################################
-Boolean Function:
-Magic 8 ball: Who will win lag?
-####################################################*/
-var magicEightBall = function(playerName, opponentName) {
-	var RandomFlag = (Math.floor((Math.random()*2)+1));
-	if(RandomFlag === 1) {
-		activePlayer = playerName;
-		console.log(activePlayer + " won the lag! Lets get this match started!");
-		console.log("--------------------------------------------------------");
-	} else {
-		activePlayer = opponentName;
-		console.log(activePlayer + " won the lag! Lets get this match started!");
-		console.log("--------------------------------------------------------");
-	};
-
-	createNewRackProcess(newRack);	
-};
-
-/* ###################################################
 Number Function:
 Not sure Yet
 ####################################################*/
@@ -133,6 +121,26 @@ var deleteBalls = function(argNumber, argArray) {
 	//Return manipulated array
 	return argArray;
 
+};
+
+/* ###################################################
+Standard Function:
+Magic 8 ball: Who will win lag?
+####################################################*/
+var magicEightBall = function(playerName, opponentName) {
+	var RandomFlag = (Math.floor((Math.random()*2)+1));
+	if(RandomFlag === 1) {
+		activePlayer = playerName;
+		console.log(activePlayer + " won the lag! Lets get this match started!");
+		console.log
+		console.log("--------------------------------------------------------");
+	} else {
+		activePlayer = opponentName;
+		console.log(activePlayer + " won the lag! Lets get this match started!");
+		console.log("--------------------------------------------------------");
+	};
+
+	createNewRackProcess(newRack);	
 };
 
 
