@@ -1,37 +1,50 @@
 // Author: Michael S. Edelnant
 // SDI 1211
 // Project 2
-// Fun Story Time
+// Fun Story Time w/ encapsulation
 
 
-/* ##########################
+/* ###################################################
 Define Variables
-###########################*/
+####################################################*/
+var myName = "Michael"; 								//string
+var opponentShortName = "Manuel"; 						//string
+var opponentFullName = "Manuel \"Speedy\" Lopez";		//escape string
 
-var myName = "Michael"; 							//string
-var opponentShortName = "Manuel"; 					//string
-var opponentFullName = "Manuel \"Speedy\" Lopez";	//escape string
+var activePlayer;										//string
+var matchLocation;										//string
 
-var matchLocation;		//string
+var matchRackCount = 0;									//num
+var matchRaceCount = 5;									//num
+var DidIWinLag = false;									//boolean
+var matchComplete = false;								//boolean
+var newRack = true;										//boolean
 
-var stripeCount = 7;								//num
-var solidCount = 7;									//num
-var matchRaceCount = 5;								//num
-var DidIWinLag = false;								//boolean
-var matchComplete = false;							//boolean
+var solidSet = ["1","2","3","4","5","6","7","8"];		//array
+var stripeSet = ["9","10","11","12","13","14","15"];	//array
 
-var solidSet = ["1","2","3","4","5","6","7","8"];
-var stripeSet = ["9","10","11","12","13","14","15"];
 
-var procedureFunction = function(passedString) {
-	if(passedString === "") {
-	
+/* ###################################################
+Process Function:
+Start a new rack
+####################################################*/
+var createNewRackProcess = function(trueFalse) {
+	if(trueFalse === true) {	
+		matchRackCount++
+		console.log("Chapter " + matchRackCount + " | Rack " + matchRackCount);
+		console.log("--------------------------------------------------------");
+		newRack = false;			
+		breakRack(myName, (Math.floor((Math.random()*4)+1)));
+
 	} else {
-
+		console.log("End of Story");
 	};
 };
 
-//booleanFunction
+/* ###################################################
+Boolean Function:
+Check if Eight ball exists in array
+####################################################*/
 var didMakeEightBall = function(argArray,argNumber) {
     var i = argArray.length;
     while (i--) {
@@ -40,10 +53,21 @@ var didMakeEightBall = function(argArray,argNumber) {
         	return false;
     	};
     };
+
+    console.log("Wait a sec! " + activePlayer + " made the 8 on the break! On to the next rack!");
+    console.log("--------------------------------------------------------");
+    newRack = true;
+	solidSet = ["1","2","3","4","5","6","7","8"];		
+	stripeSet = ["9","10","11","12","13","14","15"];    
+    createNewRackProcess(newRack);
     //else return true
     return true;
 };
 
+/* ###################################################
+Number Function:
+Not sure Yet
+####################################################*/
 var numberFunction = function(passedNumber) {
 	var i = 0;
 	while(i++ < passedNumber) {
@@ -51,7 +75,10 @@ var numberFunction = function(passedNumber) {
 	};
 };
 
-//String Function
+/* ###################################################
+String Function:
+Concatenate two strings.
+####################################################*/
 var stringFunction = function(stringOne,stringTwo) {
 	var myStringOne = stringOne;
 	var myStringTwo = stringTwo;
@@ -60,7 +87,11 @@ var stringFunction = function(stringOne,stringTwo) {
 	return outputString;
 };
 
-//Array Function
+/* ###################################################
+Array Function:
+Output random made balls and remove those specific 
+balls from the array being passed.
+####################################################*/
 var deleteBalls = function(argNumber, argArray) {
 	for (var i=0, j=argNumber; i < j; i++) {
 		//Random Index determined by initial set length of stripes or solids
@@ -76,8 +107,12 @@ var deleteBalls = function(argNumber, argArray) {
 };
 
 
-//Random Break Function to make things interesting. Capping it to max of 3 balls each on the break.
+/* ###################################################
+Random Break Function:
+Random Scenario per break. Pass number of balls made and see what happens.
+####################################################*/
 var breakRack = function(playerName,ballCount) {
+	activePlayer = playerName;
 	ballCount;
 	if(ballCount) {
 		var RandomFlag = (Math.floor((Math.random()*3)+1));
@@ -106,26 +141,36 @@ var breakRack = function(playerName,ballCount) {
 			};
 		} else {
 			console.log(playerName + " made " + ballCount + " ball on the break!");
-		}
+		};
 
 		//Check if 8 fell...
-		if(didMakeEightBall(solidSet,8) === true) {
-			console.log("Wait a sec! " + playerName + " made the 8 on the break! On to the next rack!");
-		}
+		didMakeEightBall(solidSet,8);
+		return;
 		
 	} else {
 		//Womp Womp. Lame.
 		console.log(playerName + " made nothing on the break.")
 	};
+
+
 	
 };
 
-breakRack(myName, 4);
-numberFunction(10);
-matchLocation = stringFunction("Trickshots", "Winter Park");
+/* ###################################################
+Story Time:
+Lets put everything together.
+####################################################*/
+
+//Set Setting
+matchLocation = stringFunction("Trickshots", "Winter Park, FL");
 console.log(matchLocation);
-console.log(stripeSet);
-console.log(solidSet);
+
+createNewRackProcess(newRack);
+numberFunction(10);
+
+
+
+
 
 
 
