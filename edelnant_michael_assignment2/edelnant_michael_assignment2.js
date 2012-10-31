@@ -73,7 +73,7 @@ var didMakeEightBall = function(argArray,argNumber) {
 
 /* ###################################################
 Number Function:
-Not sure Yet
+Wait function for match play. 
 ####################################################*/
 var waitForMatch = function(argNumber) {
 	var i=0;
