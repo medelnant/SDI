@@ -36,20 +36,24 @@ Process Function:
 Start a new rack
 ####################################################*/
 var createNewRackProcess = function(trueFalse) {
-	if(trueFalse === true) {	
+	//Logical Operator
+	if(!trueFalse) {	
+		console.log("End of Story");
+
+	} else {
 		matchRackCount++
 		console.log("Chapter " + matchRackCount + " | Rack " + matchRackCount);
 		console.log("--------------------------------------------------------");
+		//Trip Flag
 		newRack = false;			
-		breakRack(activePlayer, (Math.floor((Math.random()*4)+1)));
+		//Init breakRack
+		breakRack(activePlayer, (Math.floor((Math.random()*4)+1)));		
 
-	} else {
-		console.log("End of Story");
 	};
 };
 
 /* ###################################################
-Boolean Function:
+Not Good Enough Boolean Function:
 Check if Eight ball exists in array
 ####################################################*/
 var didMakeEightBall = function(argArray,argNumber) {
@@ -61,14 +65,45 @@ var didMakeEightBall = function(argArray,argNumber) {
     	};
     };
 
+    //Hey, looks like the 8 ball did fall!
     console.log("Wait a sec! " + activePlayer + " made the 8 on the break! On to the next rack!");
     console.log("--------------------------------------------------------");
+    //Trip Flag
     newRack = true;
+    //Reset sets
 	solidSet = ["1","2","3","4","5","6","7","8"];		
 	stripeSet = ["9","10","11","12","13","14","15"];    
+    //Do it again!
     createNewRackProcess(newRack);
     //else return true
     return true;
+};
+
+/* ###################################################
+Good Enough Boolean Function:
+Check if Eight ball exists in array
+####################################################*/
+var didMakeBall = function(argNumber1,argNumber2) {
+    if(argNumber1 != argNumber2) {
+    	console.log("Wait a sec! " + activePlayer + " made the 8 on the break! On to the next rack!");
+	    console.log("--------------------------------------------------------");
+	    //If this so called ball happens to be the 8.. do...
+	    if(argNumber2 === 8){
+		    //Trip Flag
+		    newRack = true;
+		    //Reset sets
+			solidSet = ["1","2","3","4","5","6","7","8"];		
+			stripeSet = ["9","10","11","12","13","14","15"];    
+		    //Do it again!
+		    createNewRackProcess(newRack);
+	    };
+	    //Yes, the ball you have inquired about has fallen
+	    return true;
+    } else {
+    	//No, the ball you have inquired about is still on the table
+    	return false;
+    };
+
 };
 
 /* ###################################################
@@ -84,8 +119,11 @@ var waitForMatch = function(argNumber) {
 	console.log("Prelude | Warm-up");
 	console.log("--------------------------------------------------------");
 
+	//iterate through matchCount
 	while(i++ < argNumber) {
+		//matchCountIteration multipled by matchLength gives us total minutes
 		minutes = i * matchLength;
+		//convert minutes to hours (floating point)
 		hours = minutes/60;
 		console.log(hours + " hours go by. Still Practicing.");
 	};
@@ -97,8 +135,11 @@ String Function:
 Concatenate two strings.
 ####################################################*/
 var stringFunction = function(argString1,argString2) {
+	//Here's my left hand
 	var myStringOne = argString1;
+	//Here's my right hand
 	var myStringTwo = argString2;
+	//Woah magic, now they are one!?
 	var outputString = myStringOne + " " + myStringTwo;
 	//Return new string
 	return outputString;
@@ -169,6 +210,7 @@ var breakRack = function(playerName,ballCount) {
 
 		//Handle Pluralisation
 		if(ballCount > 1) {
+			//Logical Operator
 			if(ballCount > 2 && RandomFlag === 3) {
 				console.log("SledgeHammer Break!")
 				console.log(playerName + " made " + (ballCount*2) + " balls on the break!");
@@ -181,7 +223,8 @@ var breakRack = function(playerName,ballCount) {
 		};
 
 		//Check if 8 fell...
-		didMakeEightBall(solidSet,8);
+		//Grab last element from the solidSet array since it will always be the 8.
+		didMakeBall(solidSet[(solidSet.length-1)],8);
 		return;
 		
 	} else {
@@ -237,7 +280,7 @@ It's Game Time!!
 		+ magicEightBall() calls (createNewRackProcess() :: procedure function)
 		+ createNewRackProcess calls (breakRack() :: extra function with 2 args).
 		+ breakRack calls (deleteBalls() :: array function) & (didMakeEightBall() :: boolean function).
-		+ didMakeEightBall calls createNewRackProcess() if 8 ball is made. Rinse & Repeat. 
+		+ didMakeBall calls createNewRackProcess() if 8 ball is made. Rinse & Repeat. 
 	############################################*/
 	magicEightBall(myName,opponentShortName);
 
