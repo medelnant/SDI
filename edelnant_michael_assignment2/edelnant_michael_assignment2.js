@@ -34,7 +34,7 @@ var createNewRackProcess = function(trueFalse) {
 		console.log("Chapter " + matchRackCount + " | Rack " + matchRackCount);
 		console.log("--------------------------------------------------------");
 		newRack = false;			
-		breakRack(myName, (Math.floor((Math.random()*4)+1)));
+		breakRack(activePlayer, (Math.floor((Math.random()*4)+1)));
 
 	} else {
 		console.log("End of Story");
@@ -65,25 +65,54 @@ var didMakeEightBall = function(argArray,argNumber) {
 };
 
 /* ###################################################
+Boolean Function:
+Magic 8 ball: Who will win lag?
+####################################################*/
+var magicEightBall = function(playerName, opponentName) {
+	var RandomFlag = (Math.floor((Math.random()*2)+1));
+	if(RandomFlag === 1) {
+		activePlayer = playerName;
+		console.log(activePlayer + " won the lag! Lets get this match started!");
+		console.log("--------------------------------------------------------");
+	} else {
+		activePlayer = opponentName;
+		console.log(activePlayer + " won the lag! Lets get this match started!");
+		console.log("--------------------------------------------------------");
+	};
+
+	createNewRackProcess(newRack);	
+};
+
+/* ###################################################
 Number Function:
 Not sure Yet
 ####################################################*/
-var numberFunction = function(passedNumber) {
-	var i = 0;
-	while(i++ < passedNumber) {
-		console.log(i);
+var waitForMatch = function(argNumber) {
+	var i=0;
+	var matchLength = 45
+	var hours = 0;
+	var minutes = 0;
+	console.log("--------------------------------------------------------");
+	console.log("Prelude | Warm-up");
+	console.log("--------------------------------------------------------");
+
+	while(i++ < argNumber) {
+		minutes = i * matchLength;
+		hours = minutes/60;
+		console.log(hours + " hours go by. Still Practicing.");
 	};
+	return hours;
 };
 
 /* ###################################################
 String Function:
 Concatenate two strings.
 ####################################################*/
-var stringFunction = function(stringOne,stringTwo) {
-	var myStringOne = stringOne;
-	var myStringTwo = stringTwo;
+var stringFunction = function(argString1,argString2) {
+	var myStringOne = argString1;
+	var myStringTwo = argString2;
 	var outputString = myStringOne + " " + myStringTwo;
-	
+	//Return new string
 	return outputString;
 };
 
@@ -117,7 +146,7 @@ var breakRack = function(playerName,ballCount) {
 	if(ballCount) {
 		var RandomFlag = (Math.floor((Math.random()*3)+1));
 		console.log(playerName + " breaks!");
-		//I like randomness: is there a better way to retrieve a random boolean?
+		//More Random Goodiness
 		if(RandomFlag === 1) {
 			//Make Stripes
 			stripeSet = deleteBalls(ballCount, stripeSet);
@@ -125,7 +154,7 @@ var breakRack = function(playerName,ballCount) {
 			//Else Make Solids
 			solidSet = deleteBalls(ballCount, solidSet);
 		} else {
-			//Make Stripes and One less solid
+			//Super Break! Damn...
 			stripeSet = deleteBalls(Math.floor(ballCount), stripeSet);
 			solidSet =  deleteBalls(Math.floor(ballCount), solidSet);
 		}
@@ -150,6 +179,11 @@ var breakRack = function(playerName,ballCount) {
 	} else {
 		//Womp Womp. Lame.
 		console.log(playerName + " made nothing on the break.")
+		if(activePlayer === myName) {
+			activePlayer = opponentShortName;
+		} else {
+			activePlayer = myName;
+		};
 	};
 
 
@@ -163,10 +197,47 @@ Lets put everything together.
 
 //Set Setting
 matchLocation = stringFunction("Trickshots", "Winter Park, FL");
-console.log(matchLocation);
+console.log("Hello, my name is " + myName + " and I would like to tell you a story.");
+console.log("To set the scene, I was at " + matchLocation + " for my APA Billiards League.");
+console.log("I had arrived there at around 7:45pm. 15min past our usual start time.");
+console.log("I made my rounds and spoke with my captain. He mentioned that I would most likely play the 4th match.");
 
-createNewRackProcess(newRack);
-numberFunction(10);
+//Lets go grab a practice table
+console.log("Since I had to wait 3 matches, I decided to grab a practice table.");
+console.log("Man "+ waitForMatch(3) + " hours is a long time to wait to play.. Grrr!");
+console.log(" ");
+
+//Yay, I get to play.
+console.log("I was finally up and my captain decided to match me against the other teams SL6.");
+console.log("Since i'm an SL6 as well, I didn't mind the competetive play.");
+console.log("and since we are both SL6's it was a " + matchRaceCount + "-" + matchRaceCount + " race.");
+console.log("First to " + matchRaceCount + " racks wins the match.");
+console.log("My opponents name was " + opponentShortName + " otherwise known as " + opponentFullName);
+console.log("We both approached the table, shook hands and wished each other good luck.");
+console.log("We then set up for our lag shots and got the match under way");
+
+/*#####################################
+It's Game Time!!
+#####################################*/
+	console.log("--------------------------------------------------------");
+	console.log("The balls slowly roll to a stop and...");
+	//In all fairness, lets have the Magic 8 Ball decide who will win this lag
+	/*###########################################
+	NOTE: 
+		+ magicEightBall() calls (createNewRackProcess() :: procedure function)
+		+ createNewRackProcess calls (breakRack() :: extra function with 2 args).
+		+ breakRack calls (deleteBalls() :: array function) & (didMakeEightBall() :: boolean function).
+		+ didMakeEightBall calls createNewRackProcess() if 8 ball is made. Rinse & Repeat. 
+	############################################*/
+	magicEightBall(myName,opponentShortName);
+
+	console.log("...");
+	console.log("...stay tuned for more dramatic billiards play!...");
+	console.log(" ");
+	console.log("--------------------------------------------------------");
+	console.log("Hint: Hit refresh for different outcomes of the lag & break result!")
+	console.log("If you haven't seen an 8 ball break yet.. keep trying!")
+
 
 
 
