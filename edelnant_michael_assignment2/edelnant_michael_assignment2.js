@@ -204,25 +204,27 @@ Lets put everything together.
 ####################################################*/
 
 //Set Setting
-matchLocation = stringFunction("Trickshots", "Winter Park, FL");
-console.log("Hello, my name is " + myName + " and I would like to tell you a story.");
-console.log("To set the scene, I was at " + matchLocation + " for my APA Billiards League.");
-console.log("I had arrived there at around 7:45pm. 15min past our usual start time.");
-console.log("I made my rounds and spoke with my captain. He mentioned that I would most likely play the 4th match.");
+	//Lets start out with the string function
+	matchLocation = stringFunction("Trickshots", "Winter Park, FL");
+	console.log("Hello, my name is " + myName + " and I would like to tell you a story.");
+	console.log("To set the scene, I was at " + matchLocation + " for my APA Billiards League.");
+	console.log("I had arrived there at around 7:45pm. 15min past our usual start time.");
+	console.log("I made my rounds and spoke with my captain. He mentioned that I would most likely play the 4th match.");
 
 //Lets go grab a practice table
-console.log("Since I had to wait 3 matches, I decided to grab a practice table.");
-console.log("Man "+ waitForMatch(3) + " hours is a long time to wait to play.. Grrr!");
-console.log(" ");
+	console.log("Since I had to wait 3 matches, I decided to grab a practice table.");
+	//Number Function coming up
+	console.log("Man "+ waitForMatch(3) + " hours is a long time to wait to play.. Grrr!");
+	console.log(" ");
 
 //Yay, I get to play.
-console.log("I was finally up and my captain decided to match me against the other teams SL6.");
-console.log("Since i'm an SL6 as well, I didn't mind the competetive play.");
-console.log("and since we are both SL6's it was a " + matchRaceCount + "-" + matchRaceCount + " race.");
-console.log("First to " + matchRaceCount + " racks wins the match.");
-console.log("My opponents name was " + opponentShortName + " otherwise known as " + opponentFullName);
-console.log("We both approached the table, shook hands and wished each other good luck.");
-console.log("We then set up for our lag shots and got the match under way");
+	console.log("I was finally up and my captain decided to match me against the other teams SL6.");
+	console.log("Since i'm an SL6 as well, I didn't mind the competetive play.");
+	console.log("and since we are both SL6's it was a " + matchRaceCount + "-" + matchRaceCount + " race.");
+	console.log("First to " + matchRaceCount + " racks wins the match.");
+	console.log("My opponents name was " + opponentShortName + " otherwise known as " + opponentFullName);
+	console.log("We both approached the table, shook hands and wished each other good luck.");
+	console.log("We then set up for our lag shots and got the match under way");
 
 /*#####################################
 It's Game Time!!
