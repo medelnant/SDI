@@ -7,13 +7,9 @@
 // Project Requirements: https://dl.dropbox.com/u/146464/project2_flowChart.png
 // Due Date: 11/8/2012
 // --------------------------------------------------------------------------- /
-// Fun Story Time w/ encapsulation
+// Fun Story Time w/ JSON, Objects & Constructors Oh' My!
 
-/* ###################################################
-New Variables
-####################################################*/
-var protagonist; 										//object
-var antagonist;											//object
+
 
 /* ###################################################
 Define Variables
@@ -25,36 +21,113 @@ var opponentFullName = "Manuel \"Speedy\" Lopez";		//escape string
 var activePlayer;										//string
 var matchLocation;										//string
 
-var matchRackCount = 0;									//num
-var matchRaceCount = 5;									//num
 var DidIWinLag = false;									//boolean
 var matchComplete = false;								//boolean
-var newRack = true;										//boolean
 
 var solidSet = ["1","2","3","4","5","6","7","8"];		//array
 var stripeSet = ["9","10","11","12","13","14","15"];	//array
 
 
+
 /* ###################################################
-Process Function:
-Start a new rack
+Build Match Object
 ####################################################*/
-var createNewRackProcess = function(trueFalse) {
-	//Logical Operator
-	if(!trueFalse) {	
-		console.log("End of Story");
+var matchObj = {
+	protagonist: "",
+	antagonist: "",
+	newRack: true,
+	isMatchStarted: false,
+	raceCount: 5,
+	rackCount: 0,
 
+	/* ###################################################
+	Method: Procedure | Find Players
+	####################################################*/
+	findPlayers: function (jSONObj) {
+		if (jSONObj) {
+			for (var key in jSONObj.players) {
+				var player = jSONObj.players[key];
+				console.log("First Name: " + player.fName + " Last Name: " + player.lName + " Nick Name: " + player.nName + " Skill Level " + player.SL);
+				console.log("Favorite Games");
+				for (var i=0, j=player.favGames.length; i<j; i++) {
+					console.log(player.favGames[i]);
+				}
+			};        			
 	} else {
-		matchRackCount++
-		console.log("Chapter " + matchRackCount + " | Rack " + matchRackCount);
-		console.log("--------------------------------------------------------");
-		//Trip Flag
-		newRack = false;			
-		//Init breakRack
-		breakRack(activePlayer, (Math.floor((Math.random()*4)+1)));		
+			console.log("Looks like we will have to a make-up since there is not enough time to play our match.") };   
+	},
 
-	};
+	/* ###################################################
+	Method: Procedure | Find Game Types
+	####################################################*/
+	findGames: function (jSONObj) {
+		if (jSONObj) {
+			for (var key in jSONObj.games) {
+				var game = jSONObj.games[key];
+				console.log("Game Name: " + game.gName + " Solids: " + game.solids + " Stripes: " + game.stripes);
+				console.log("Objective: " + game.objective);
+			};
+		}
+	},
+
+	/* ###################################################
+	Method: Magic 8 ball: Who will win lag? 
+	####################################################*/
+	magicEightBall: function(playerName, opponentName) {
+		var RandomFlag = (Math.floor((Math.random()*2)+1));
+		if(RandomFlag === 1) {
+			activePlayer = playerName;
+			console.log(activePlayer + " won the lag! Lets get this match started!");
+			console.log
+			console.log("--------------------------------------------------------");
+		} else {
+			activePlayer = opponentName;
+			console.log(activePlayer + " won the lag! Lets get this match started!");
+			console.log("--------------------------------------------------------");
+		}
+
+		this.createNewRackProcess(this.newRack);	
+	},
+
+	/* ###################################################
+	Method: Start a new rack.
+	####################################################*/
+	createNewRackProcess: function(trueFalse) {
+		//Logical Operator
+		if(!trueFalse) {	
+			console.log("End of Story");
+		} else {
+			this.rackCount++
+			console.log("Chapter " + this.rackCount + " | Rack " + this.rackCount);
+			console.log("--------------------------------------------------------");
+			//Trip Flag
+			this.newRack = false;			
+			//Init breakRack
+			breakRack(activePlayer, (Math.floor((Math.random()*4)+1)));		
+
+		}
+	},
+
+	/* ###################################################
+	Method: String Combo | Concatenate two strings
+	####################################################*/
+	stringFunction: function(argString1,argString2) {
+		//Here's my left hand
+		var myStringOne = argString1;
+		//Here's my right hand
+		var myStringTwo = argString2;
+		//Woah magic, now they are one!?
+		var outputString = myStringOne + " " + myStringTwo;
+		//Return new string
+		return outputString;
+	}	
 };
+
+
+
+
+
+
 
 /* ###################################################
 Not Good Enough Boolean Function:
@@ -78,7 +151,7 @@ var didMakeEightBall = function(argArray,argNumber) {
 	solidSet = ["1","2","3","4","5","6","7","8"];		
 	stripeSet = ["9","10","11","12","13","14","15"];    
     //Do it again!
-    createNewRackProcess(newRack);
+    matchObj.createNewRackProcess(newRack);
     //else return true
     return true;
 };
@@ -99,7 +172,7 @@ var didMakeBall = function(argNumber1,argNumber2) {
 			solidSet = ["1","2","3","4","5","6","7","8"];		
 			stripeSet = ["9","10","11","12","13","14","15"];    
 		    //Do it again!
-		    createNewRackProcess(newRack);
+		    matchObj.createNewRackProcess(matchObj.newRack);
 	    };
 	    //Yes, the ball you have inquired about has fallen
 	    return true;
@@ -135,21 +208,6 @@ var waitForMatch = function(argNumber) {
 };
 
 /* ###################################################
-String Function:
-Concatenate two strings.
-####################################################*/
-var stringFunction = function(argString1,argString2) {
-	//Here's my left hand
-	var myStringOne = argString1;
-	//Here's my right hand
-	var myStringTwo = argString2;
-	//Woah magic, now they are one!?
-	var outputString = myStringOne + " " + myStringTwo;
-	//Return new string
-	return outputString;
-};
-
-/* ###################################################
 Array Function:
 Output random made balls and remove those specific 
 balls from the array being passed.
@@ -168,25 +226,7 @@ var deleteBalls = function(argNumber, argArray) {
 
 };
 
-/* ###################################################
-Standard Function:
-Magic 8 ball: Who will win lag?
-####################################################*/
-var magicEightBall = function(playerName, opponentName) {
-	var RandomFlag = (Math.floor((Math.random()*2)+1));
-	if(RandomFlag === 1) {
-		activePlayer = playerName;
-		console.log(activePlayer + " won the lag! Lets get this match started!");
-		console.log
-		console.log("--------------------------------------------------------");
-	} else {
-		activePlayer = opponentName;
-		console.log(activePlayer + " won the lag! Lets get this match started!");
-		console.log("--------------------------------------------------------");
-	};
 
-	createNewRackProcess(newRack);	
-};
 
 
 /* ###################################################
@@ -252,40 +292,40 @@ Lets put everything together.
 
 //Set Setting
 	//Lets start out with the string function
-	/*
-	matchLocation = stringFunction("Trickshots", "Winter Park, FL");
+	
+	matchLocation = matchObj.stringFunction("Trickshots", "Winter Park, FL");
 	console.log("Hello, my name is " + myName + " and I would like to tell you a story.");
 	console.log("To set the scene, I was at " + matchLocation + " for my APA Billiards League.");
 	console.log("I had arrived there at around 7:45pm. 15min past our usual start time.");
 	console.log("I made my rounds and spoke with my captain. He mentioned that I would most likely play the 4th match.");
-	*/
+
 
 //Lets go grab a practice table
-	/*
+	
 	console.log("Since I had to wait 3 matches, I decided to grab a practice table.");
 	//Number Function coming up
 	console.log("Man "+ waitForMatch(3) + " hours is a long time to wait to play.. Grrr!");
 	console.log(" ");
-	*/
+	
 
 //Yay, I get to play.
-	/*
+	
 	console.log("I was finally up and my captain decided to match me against the other teams SL6.");
 	console.log("Since i'm an SL6 as well, I didn't mind the competetive play.");
-	console.log("and since we are both SL6's it was a " + matchRaceCount + "-" + matchRaceCount + " race.");
-	console.log("First to " + matchRaceCount + " racks wins the match.");
+	console.log("and since we are both SL6's it was a " + matchObj.raceCount + "-" + matchObj.raceCount + " race.");
+	console.log("First to " + matchObj.raceCount + " racks wins the match.");
 	console.log("My opponents name was " + opponentShortName + " otherwise known as " + opponentFullName);
 	console.log("We both approached the table, shook hands and wished each other good luck.");
 	console.log("We then set up for our lag shots and got the match under way");
-	*/
+	
 
 /*#####################################
 It's Game Time!!
 #####################################*/
-	/*
+	
 	console.log("--------------------------------------------------------");
 	console.log("The balls slowly roll to a stop and...");
-	*/
+	
 	//In all fairness, lets have the Magic 8 Ball decide who will win this lag
 	/*###########################################
 	NOTE: 
@@ -294,8 +334,8 @@ It's Game Time!!
 		+ breakRack calls (deleteBalls() :: array function) & (didMakeEightBall() :: boolean function).
 		+ didMakeBall calls createNewRackProcess() if 8 ball is made. Rinse & Repeat. 
 	############################################*/
-	/*
-	magicEightBall(myName,opponentShortName);
+	
+	matchObj.magicEightBall(myName,opponentShortName);
 
 	console.log("...");
 	console.log("...stay tuned for more dramatic billiards play!...");
@@ -303,19 +343,15 @@ It's Game Time!!
 	console.log("--------------------------------------------------------");
 	console.log("Hint: Hit refresh for different outcomes of the lag & break result!")
 	console.log("If you haven't seen an 8 ball break yet.. keep trying!")
-	*/
-
-	for (var key in playerData.players) {
-		var player = playerData.players[key];
-		console.log("First Name: " + player.fName + " Last Name: " + player.lName + " Nick Name: " + player.nName + " Skill Level " + player.SL);
-		console.log("Favorite Games");
-		for (var i=0, j=player.favGames.length; i<j; i++) {
-			console.log(player.favGames[i]);
-		}
-	};
+	
 
 
 
+
+
+
+matchObj.findPlayers(playerData);
+matchObj.findGames(gameData);
 
 
 

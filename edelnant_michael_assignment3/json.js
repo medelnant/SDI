@@ -22,13 +22,13 @@ var playerData = {
 var gameData = {
         "games": [
             {
-                "gameName"  :   "8 Ball",                                           
+                "gName"  :   "8 Ball",                                           
                 "solids"    :   [1,2,3,4,5,6,7,8],                                  
                 "stripes"   :   [9,10,11,12,13,14,15],                              
                 "objective" :   "Make all of your balls to get to the 8. First to sink all of their balls and the 8 wins the rack."
             },
             {
-                "gameName"  :   "9 Ball",                                           
+                "gName"  :   "9 Ball",                                           
                 "solids"    :   [1,2,3,4,5,6,7,8],                                  
                 "stripes"   :   [9],                                                
                 "objective" :   "All balls need to progressively be sunk in numeric order. First to sink 9 wins the rack." 
