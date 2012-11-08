@@ -4,7 +4,7 @@
 // Instructor: Lee Lewis
 // --------------------------------------------------------------------------- /
 // Project 3
-// Project Requirements: https://dl.dropbox.com/u/146464/project2_flowChart.png
+// Project Requirements: https://dl.dropbox.com/u/146464/EdelnantMichael_SDI_Project3_FlowChart.pdf
 // Due Date: 11/8/2012
 // --------------------------------------------------------------------------- /
 // Fun Story Time w/ JSON, Objects & Constructors Oh' My!

@@ -1,3 +1,14 @@
+// Author: Michael S. Edelnant
+// School: Full Sail University
+// Course: SDI 1211
+// Instructor: Lee Lewis
+// --------------------------------------------------------------------------- /
+// Project 3
+// Project Requirements: https://dl.dropbox.com/u/146464/EdelnantMichael_SDI_Project3_FlowChart.pdf
+// Due Date: 11/8/2012
+// --------------------------------------------------------------------------- /
+// JSON Data
+
 var playerData = {
         "players": [
             {
