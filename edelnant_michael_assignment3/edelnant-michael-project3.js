@@ -23,9 +23,9 @@ Build Primary Match Object
 ####################################################*/
 var matchObj = {
 	activePlayer	: "",										//string
-	protagonist		: "",										//string
-	antagonist		: "",										//string
-	matchLocation	: "",										//string
+	matchLocation	: "",										//string	
+	protagonist		: "",										//object
+	antagonist		: "",										//object
 	newRack 		: true,										//boolean
 	isMatchStarted 	: false,									//boolean	
 	matchComplete 	: false,									//boolean
@@ -42,26 +42,26 @@ var matchObj = {
 			for (var key in jSONObj.players) {
 				var player = jSONObj.players[key];
 				if(parseInt(key) === 0) {
+					//Set up data for protagonist character
 					this.protagonist = newPlayer(player.fName);
 					this.protagonist.lName = player.lName;
 					this.protagonist.nName = player.nName;
 					this.protagonist.skillLevel = player.SL;
 					this.protagonist.favGames = player.favGames;
-					//console.log("First Name: " + this.protagonist.fName + " Last Name " + this.protagonist.fName +
-					//" NickName " + this.protagonist.nName + " FavGames: " + this.protagonist.favGames);
 				} else if (parseInt(key) === 1) {
+					//Set up data for antagonist character
 					this.antagonist = newPlayer(player.fName);
 					this.antagonist.lName = player.lName;
 					this.antagonist.nName = player.nName;
 					this.antagonist.skillLevel = player.SL;
 					this.antagonist.favGames = player.favGames;
-					//console.log("First Name: " + this.antagonist.fName + " Last Name " + this.antagonist.fName +
-					//" NickName " + this.antagonist.nName + " FavGames: " + this.antagonist.favGames);
 				} else {
+					//Too many entries
 					console.log("Hey buddy! Please remove extra players from JSON data.");
 				}				
 			};        			
 	} else {
+			//Doesn't seem like JSON data loaded. 
 			console.log("Looks like we will have to do a make-up since there is not enough time to play our match.") };   
 	},
 
@@ -226,7 +226,6 @@ var newPlayer = function(name) {
 	var breakRack = function(player,ballCount) {
 		matchObj.activePlayer = player;
 		var playerName = matchObj.activePlayer.fName;
-		ballCount;
 		if(ballCount) {
 			var RandomFlag = (Math.floor((Math.random()*3)+1));
 			console.log(playerName + " breaks!");
