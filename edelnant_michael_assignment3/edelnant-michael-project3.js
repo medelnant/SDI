@@ -62,7 +62,7 @@ var matchObj = {
 				}				
 			};        			
 	} else {
-			console.log("Looks like we will have to a make-up since there is not enough time to play our match.") };   
+			console.log("Looks like we will have to do a make-up since there is not enough time to play our match.") };   
 	},
 
 	/* ###################################################
