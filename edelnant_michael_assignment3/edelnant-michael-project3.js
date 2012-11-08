@@ -10,7 +10,13 @@
 // Fun Story Time w/ JSON, Objects & Constructors Oh' My!
 
 
-
+/* ###################################################
+Global Variables
+####################################################*/
+var myName;
+var opponent;
+var pointMultiplier = 10;
+var arcadePoints = 0;
 
 /* ###################################################
 Build Primary Match Object
@@ -136,7 +142,10 @@ var newPlayer = function(name) {
 	####################################################*/
 	var didMakeBall = function(argNumber1,argNumber2) {
 	    if(argNumber1 != argNumber2) {
+	    	arcadePoints += 1000;
 	    	console.log("Wait a sec! " + matchObj.activePlayer.fName + " made the 8 on the break! On to the next rack!");
+		    console.log("That's 1000 bonus points!!")
+		    console.log("Total Arcade Points for this break = " + arcadePoints);
 		    console.log("--------------------------------------------------------");
 		    //If this so called ball happens to be the 8.. do...
 		    if(argNumber2 === 8){
@@ -151,6 +160,7 @@ var newPlayer = function(name) {
 		    //Yes, the ball you have inquired about has fallen
 		    return true;
 	    } else {
+	    	console.log("Total Arcade Points for this break = " + arcadePoints);
 	    	//No, the ball you have inquired about is still on the table
 	    	return false;
 	    };
@@ -191,11 +201,20 @@ var newPlayer = function(name) {
 			//Random Index determined by initial set length of stripes or solids
 			var RandomIndex = (Math.floor((Math.random()*argArray.length)));
 			//Call out which balls were made
-			console.log(argArray[RandomIndex] + " ball falls...");
+				console.log(argArray[RandomIndex] + " ball falls...");
 			//Remove balls made
-			argArray.splice(RandomIndex, 1);
+				argArray.splice(RandomIndex, 1);			
+			//Adding pointMultiplier to add some form of arcade feel
+			//and to meet the requirement of the nested loop.
+			for (var n=1, k=argArray.length; n<k; n++) {
+				pointMultiplier = pointMultiplier+15;
+				
+			};
 		};
 		//Return manipulated array
+		console.log("Arcade Bonus Points: " + pointMultiplier);
+		arcadePoints = arcadePoints + pointMultiplier;
+		pointMultiplier = 10;
 		return argArray;
 
 	};
@@ -252,6 +271,8 @@ var newPlayer = function(name) {
 				matchObj.activePlayer = matchObj.antagonist.fName;
 			};
 		};
+
+		arcadePoints = 0;
 
 	};		
 
