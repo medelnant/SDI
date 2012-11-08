@@ -43,8 +43,7 @@ var matchObj = {
 					this.protagonist.favGames = player.favGames;
 					//console.log("First Name: " + this.protagonist.fName + " Last Name " + this.protagonist.fName +
 					//" NickName " + this.protagonist.nName + " FavGames: " + this.protagonist.favGames);
-				};
-				if(parseInt(key) === 1) {
+				} else if (parseInt(key) === 1) {
 					this.antagonist = newPlayer(player.fName);
 					this.antagonist.lName = player.lName;
 					this.antagonist.nName = player.nName;
@@ -52,6 +51,8 @@ var matchObj = {
 					this.antagonist.favGames = player.favGames;
 					//console.log("First Name: " + this.antagonist.fName + " Last Name " + this.antagonist.fName +
 					//" NickName " + this.antagonist.nName + " FavGames: " + this.antagonist.favGames);
+				} else {
+					console.log("Hey buddy! Please remove extra players from JSON data.");
 				}				
 			};        			
 	} else {
