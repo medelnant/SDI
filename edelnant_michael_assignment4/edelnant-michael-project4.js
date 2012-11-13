@@ -187,21 +187,15 @@ Arrays
 	};
 
 
-
 	//Array Sorted by key
-	var sortArrayByKey = function(argArray) {
+	var sortArrayByKey = function(argArray,argSortBy) {
 		var baseArray = argArray;
-		for(var key in baseArray) {
-			console.log(baseArray[key]);
-		}
 		baseArray.sort(
 			//Compare values and sort
 			function(a,b) {
-				return parseFloat(a[key]) - parseFloat(b[key])
+				return parseFloat(a[argSortBy]) - parseFloat(b[argSortBy]);
 			});
 		return baseArray;
-
-
 	};	
 
 /* ###################################################
@@ -259,7 +253,8 @@ console.log("This string:14567ba is = " + lib.convertStringtoNumber("14567ba"));
 console.log("The smallest value that is greater than 4 is = " + lib.smallestValueGT(["1","2","3","4","5","6","7","8","9"],4));
 //SumValue
 console.log("The sum value of all numbers within the following array: ['Bear',10,'Fish',15,25,'Moose',75] is = " + lib.sumNumbers(['Bear',10,'Fish',15,25,'Moose',75]));
-//
-lib.sortArrayByKey([{sortNumber:3},{sortNumber:1},{sortNumber:2}]);
+//Sort Array by Object key argument
+console.log("This array:[{sortNumber:3},{sortNumber:1},{sortNumber:2}] is going to sort = ");
+console.log(lib.sortArrayByKey([{sortNumber:3},{sortNumber:1},{sortNumber:2}],"sortNumber"));
 
 
