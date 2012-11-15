@@ -30,7 +30,7 @@ Strings
 	//Check Email
 	var checkEmail = function(argString) {
 		//Define Regular Expression
-		var expression =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		var expression =  /^[a-z0-9\._-]+@([a-z0-9_-]+\.)+[a-z]{2,6}$/i;
 		//Test string thats passed
 		var checkString = expression.test(argString);
 		//Return true or false via test method
@@ -51,11 +51,14 @@ Strings
 	//Split word and titleCase each
 	var splitTitleCase = function(argString) {
 		//Create function to Uppercase/Titlecase to first letter of each word in sentence.
+		var expression = /\w\S*/g;
 		var titleCaseString = function(argString) {
-			return argString.charAt(0).toUpperCase() + argString.substr(1);
+			var result;
+			result = argString.charAt(0).toUpperCase() + argString.substr(1);
+			return result;
 		};
 		//Apply function to first letter of each word.
-		var modifiedString = argString.replace(/\w\S*/g, titleCaseString);
+		var modifiedString = argString.replace(expression, titleCaseString);
 		//Return modified string
 		return modifiedString;			
 	};
@@ -190,11 +193,10 @@ Arrays
 	//Array Sorted by key
 	var sortArrayByKey = function(argArray,argSortBy) {
 		var baseArray = argArray;
-		baseArray.sort(
-			//Compare values and sort
-			function(a,b) {
-				return parseFloat(a[argSortBy]) - parseFloat(b[argSortBy]);
-			});
+		var sortFuncton = function(a,b) {
+			return parseFloat(a[argSortBy]) - parseFloat(b[argSortBy]);
+		}
+		baseArray.sort(sortFunction());
 		return baseArray;
 	};	
 
