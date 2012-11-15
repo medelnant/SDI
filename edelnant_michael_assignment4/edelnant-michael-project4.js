@@ -4,7 +4,7 @@
 // Instructor: Lee Lewis
 // --------------------------------------------------------------------------- /
 // Project 4
-// Flow Chart: 
+// Flow Chart: https://dl.dropbox.com/u/146464/EdelnantMichael_SDI_Project4_FlowChart.pdf
 // Due Date: 11/15/2012
 // --------------------------------------------------------------------------- /
 // Libaries & Utility Functions
@@ -190,13 +190,14 @@ Arrays
 	};
 
 
-	//Array Sorted by key
+//Array Sorted by key
 	var sortArrayByKey = function(argArray,argSortBy) {
 		var baseArray = argArray;
-		var sortFuncton = function(a,b) {
-			return parseFloat(a[argSortBy]) - parseFloat(b[argSortBy]);
-		}
-		baseArray.sort(sortFunction());
+		baseArray.sort(
+			//Compare values and sort
+			function(a,b) {
+				return parseFloat(a[argSortBy]) - parseFloat(b[argSortBy]);
+			});
 		return baseArray;
 	};	
 
